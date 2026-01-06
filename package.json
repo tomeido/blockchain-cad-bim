@@ -1,0 +1,40 @@
+{
+  "name": "blockchain-cad-bim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@tanstack/react-query": "^5.90.16",
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.182.0",
+    "autoprefixer": "^10.4.23",
+    "clsx": "^2.1.1",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.1",
+    "lucide-react": "^0.562.0",
+    "next": "^16.1.1",
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^3.4.17",
+    "three": "^0.182.0",
+    "typescript": "^5.9.3",
+    "viem": "^2.23.0",
+    "wagmi": "^2.14.0"
+  }
+}
