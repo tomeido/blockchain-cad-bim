@@ -1,10 +1,10 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
+import { Canvas, ThreeElements } from '@react-three/fiber';
 import { OrbitControls, Stage, Grid } from '@react-three/drei';
 import { useState } from 'react';
 
-function Box(props: any) {
+function Box(props: ThreeElements['mesh']) {
     const [hovered, setHover] = useState(false);
     const [active, setActive] = useState(false);
 
