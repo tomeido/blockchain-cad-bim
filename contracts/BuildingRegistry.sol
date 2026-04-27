@@ -16,6 +16,21 @@ contract BuildingRegistry {
     event BuildingRegistered(uint256 indexed id, address indexed owner, string name, string ipfsHash);
 
     function registerBuilding(string memory _name, string memory _description, string memory _ipfsHash) public {
+        bytes memory ipfsBytes = bytes(_ipfsHash);
+        require(ipfsBytes.length > 0, "IPFS hash cannot be empty");
+
+        // Basic validation for common IPFS hash prefixes
+        // CIDv0 starts with 'Qm'
+        // CIDv1 typically starts with 'bafy'
+        bool hasValidPrefix = false;
+        if (ipfsBytes.length >= 2 && ipfsBytes[0] == "Q" && ipfsBytes[1] == "m") {
+            hasValidPrefix = true;
+        } else if (ipfsBytes.length >= 4 && ipfsBytes[0] == "b" && ipfsBytes[1] == "a" && ipfsBytes[2] == "f" && ipfsBytes[3] == "y") {
+            hasValidPrefix = true;
+        }
+
+        require(hasValidPrefix, "Invalid IPFS hash format");
+
         totalBuildings++;
         buildings[totalBuildings] = Building({
             name: _name,
