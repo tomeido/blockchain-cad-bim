@@ -11,6 +11,52 @@ describe("BuildingRegistry", function () {
     registry = await BuildingRegistry.deploy();
   });
 
+  describe("registerBuilding", function () {
+    it("should successfully register a building with a valid CIDv0 (Qm) IPFS hash", async function () {
+      const name = "Building Qm";
+      const description = "CIDv0 test";
+      const ipfsHash = "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG"; // Valid format
+
+      await expect(registry.registerBuilding(name, description, ipfsHash))
+        .to.emit(registry, "BuildingRegistered")
+        .withArgs(1, owner.address, name, ipfsHash);
+
+      const building = await registry.getBuilding(1);
+      expect(building.ipfsHash).to.equal(ipfsHash);
+    });
+
+    it("should successfully register a building with a valid CIDv1 (bafy) IPFS hash", async function () {
+      const name = "Building bafy";
+      const description = "CIDv1 test";
+      const ipfsHash = "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3dfuylqabf3oclgtqy55fbzdi"; // Valid format
+
+      await expect(registry.registerBuilding(name, description, ipfsHash))
+        .to.emit(registry, "BuildingRegistered")
+        .withArgs(1, owner.address, name, ipfsHash);
+
+      const building = await registry.getBuilding(1);
+      expect(building.ipfsHash).to.equal(ipfsHash);
+    });
+
+    it("should revert if the IPFS hash is empty", async function () {
+      const name = "Building Empty";
+      const description = "Empty hash test";
+      const ipfsHash = "";
+
+      await expect(registry.registerBuilding(name, description, ipfsHash))
+        .to.be.revertedWith("IPFS hash cannot be empty");
+    });
+
+    it("should revert if the IPFS hash has an invalid prefix", async function () {
+      const name = "Building Invalid";
+      const description = "Invalid prefix test";
+      const ipfsHash = "InvalidHashPrefix1234567890";
+
+      await expect(registry.registerBuilding(name, description, ipfsHash))
+        .to.be.revertedWith("Invalid IPFS hash format");
+    });
+  });
+
   describe("getBuilding", function () {
     it("should return the correct building details after registration", async function () {
       const name = "Building A";
@@ -46,8 +92,8 @@ describe("BuildingRegistry", function () {
     });
 
     it("should distinguish between different registered buildings", async function () {
-      await registry.registerBuilding("B1", "D1", "H1");
-      await registry.registerBuilding("B2", "D2", "H2");
+      await registry.registerBuilding("B1", "D1", "Qm11111111111111111111111111111111111111111111");
+      await registry.registerBuilding("B2", "D2", "Qm22222222222222222222222222222222222222222222");
 
       const b1 = await registry.getBuilding(1);
       const b2 = await registry.getBuilding(2);
