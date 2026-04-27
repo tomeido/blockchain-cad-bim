@@ -4,6 +4,8 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, Grid } from '@react-three/drei';
 import { useState } from 'react';
 
+const BOX_ARGS: [number, number, number] = [1, 1, 1];
+
 function Box(props: any) {
     const [hovered, setHover] = useState(false);
     const [active, setActive] = useState(false);
@@ -15,7 +17,7 @@ function Box(props: any) {
             onClick={(event) => setActive(!active)}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}>
-            <boxGeometry args={[1, 1, 1]} />
+            <boxGeometry args={BOX_ARGS} />
             <meshStandardMaterial
                 color={hovered ? '#6366f1' : '#ffffff'}
                 emissive={hovered ? '#4338ca' : '#000000'}
