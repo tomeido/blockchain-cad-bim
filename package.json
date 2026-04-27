@@ -36,5 +36,9 @@
     "typescript": "^5.9.3",
     "viem": "^2.23.0",
     "wagmi": "^2.14.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0"
   }
 }
