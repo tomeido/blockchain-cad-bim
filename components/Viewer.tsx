@@ -1,6 +1,6 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
+import { Canvas, ThreeElements } from '@react-three/fiber';
 import { OrbitControls, Stage, Grid } from '@react-three/drei';
 import { useState } from 'react';
 
