@@ -15,7 +15,7 @@ export function Box(props: any) {
             onClick={(event) => setActive(!active)}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}>
-            <boxGeometry args={[1, 1, 1]} />
+            <boxGeometry args={BOX_ARGS} />
             <meshStandardMaterial
                 color={hovered ? '#6366f1' : '#ffffff'}
                 emissive={hovered ? '#4338ca' : '#000000'}
