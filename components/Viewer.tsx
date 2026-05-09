@@ -4,6 +4,8 @@ import { Canvas, ThreeElements } from '@react-three/fiber';
 import { OrbitControls, Stage, Grid } from '@react-three/drei';
 import { useState } from 'react';
 
+const BOX_ARGS = [1, 1, 1];
+
 export function Box(props: any) {
     const [hovered, setHover] = useState(false);
     const [active, setActive] = useState(false);
