@@ -2,7 +2,7 @@
 
 import { Canvas, ThreeElements } from '@react-three/fiber';
 import { OrbitControls, Stage, Grid } from '@react-three/drei';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 const BOX_ARGS = [1, 1, 1];
 
@@ -10,14 +10,9 @@ export function Box(props: any) {
     const [hovered, setHover] = useState(false);
     const [active, setActive] = useState(false);
 
-    return (
-        <mesh
-            {...props}
-            scale={active ? 1.5 : 1}
-            onClick={(event) => setActive(!active)}
-            onPointerOver={(event) => setHover(true)}
-            onPointerOut={(event) => setHover(false)}>
-            <boxGeometry args={BOX_ARGS} />
+    const geometry = useMemo(() => <boxGeometry args={BOX_ARGS} />, []);
+    const material = useMemo(
+        () => (
             <meshStandardMaterial
                 color={hovered ? '#6366f1' : '#ffffff'}
                 emissive={hovered ? '#4338ca' : '#000000'}
@@ -25,6 +20,19 @@ export function Box(props: any) {
                 roughness={0.1}
                 metalness={0.8}
             />
+        ),
+        [hovered]
+    );
+
+    return (
+        <mesh
+            {...props}
+            scale={active ? 1.5 : 1}
+            onClick={() => setActive(!active)}
+            onPointerOver={() => setHover(true)}
+            onPointerOut={() => setHover(false)}>
+            {geometry}
+            {material}
         </mesh>
     );
 }
