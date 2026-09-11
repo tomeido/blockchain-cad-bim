@@ -72,3 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## License
 
 MIT
+
+## Frontend tests
+
+Run `npm ci` and `npm test -- --runInBand`. The Jest suite covers the home page, Viewer overlay, and Box geometry, hover material, and click scale using React Three Test Renderer. npm and `package-lock.json` are the supported dependency workflow.
